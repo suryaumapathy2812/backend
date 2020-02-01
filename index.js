@@ -12,8 +12,8 @@ PORT = process.env.PORT || 5000;
 
 app.use(cors());
 
-//app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
-app.listen(PORT);
+app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
+//app.listen(PORT);
 
 
 const bodyparser = require("body-parser");

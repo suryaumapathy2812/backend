@@ -1,11 +1,11 @@
-let config = {
+let config1 = {
     host: "localhost",
     user: "root",
     password: "surya123",
     database: "test_db"
   };
 
-let config1 = {
+let config = {
     host: "13.235.178.171",
     user: "surya",
     password: "Surya@123",

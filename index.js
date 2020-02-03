@@ -5,7 +5,7 @@ const config = require('config');
 //var config = require("./config.js");
 
 const dbConfig = config.get('dbConfig');
-
+console.log(dbConfig);
 
 var con = mysql.createConnection(dbConfig);
 

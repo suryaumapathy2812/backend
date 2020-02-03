@@ -1,0 +1,8 @@
+{
+    "dbConfig" : {
+        "host": "localhost",
+        "user": "root",
+        "password": "surya123",
+        "database": "test_db"
+      }
+}

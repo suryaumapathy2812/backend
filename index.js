@@ -1,11 +1,13 @@
 var mysql = require("mysql");
 var cors = require("cors");
 
-var config = require("./config.js");
+const config = require('config');
+//var config = require("./config.js");
 
-var con = mysql.createConnection(config);
+const dbConfig = config.get('dbConfig');
 
 
+var con = mysql.createConnection(dbConfig);
 
 var express = require("express"),
   app = express(),
@@ -103,6 +105,24 @@ app.post("/adduser", (req, res) => {
       res.json(result);
     }
   });
+});
+
+app.post("/addrequest", (req, res) => {
+  var sql =
+    "insert into requests(name,description,amount,created_by_id) values (?,?,?,?)";
+  var params = [
+    req.body.name,
+    req.body.description,
+    req.body.amount,
+    req.body.created_by_id
+  ];
+  con.query(sql, params, function(err, result){
+      if(err){
+          res.json(err);
+      }else{
+          res.json("Request Created Successfully");
+      }
+  })
 });
 
 //----------------------------------------Requests--------------------------------------------//

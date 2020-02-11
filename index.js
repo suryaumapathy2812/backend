@@ -80,15 +80,11 @@ app.get("/getrequests", (req, res) => {
 app.post("/login", (req, res) => {
     var sql = "select * from users where email =? and password=?";
     var params = [req.body.email, req.body.password];
-    
+
     var to = req.body.email;
     var subject = "logged In";
     var content = "You are Logged In.";
-    try {
-        mail.send(to, subject, content);
-    } catch (err1) {
-        console.log(err1);
-    }
+
 
     con.query(sql, params, function (err, data) {
         if (err) {
@@ -96,6 +92,11 @@ app.post("/login", (req, res) => {
         } else {
             if (data.length == 1) {
                 res.json(data[0]);
+                try {
+                    mail.send(to, subject, content);
+                } catch (err1) {
+                    console.log(err1);
+                }
             } else {
                 res.json({ errorMessage: "Invalid Username or Password" });
             }
@@ -114,23 +115,24 @@ app.post("/adduser", (req, res) => {
     var to = req.body.email;
     var subject = "Registered Successfully";
     var content = "You have successfully registered.";
-    try {
-        mail.send(to, subject, content);
-    } catch (err1) {
-        console.log(err1);
-    }
+
     con.query(sql, params, function (err, result) {
         if (err) {
             res.json(err);
         } else {
             res.json(result);
+            try {
+                mail.send(to, subject, content);
+            } catch (err1) {
+                console.log(err1);
+            }
         }
     });
 });
 
 app.post("/addrequest", (req, res) => {
     var date = req.body.expiry_date;
-    console.log("expiry_Date"  + JSON.stringify(params));
+    console.log("expiry_Date" + JSON.stringify(params));
     var sql = "insert into requests(name,description,amount,created_by_id,status,expiry_date) values (?,?,?,?,?,?)";
     var params = [
         req.body.name,
@@ -144,16 +146,17 @@ app.post("/addrequest", (req, res) => {
     var to = req.body.email;
     var subject = "Request Created";
     var content = "Your request has been successfully created.";
-    try {
-        mail.send(to, subject, content);
-    } catch (err1) {
-        console.log(err1);
-    }
+
     con.query(sql, params, function (err, result) {
         if (err) {
             res.json(err);
         } else {
             res.json("Request Created Successfully");
+            try {
+                mail.send(to, subject, content);
+            } catch (err1) {
+                console.log(err1);
+            }
         }
     })
 });
@@ -226,22 +229,24 @@ app.get("/request/:req_id", (req, res) => {
 app.post("/donate", (req, res) => {
     var sql = "INSERT INTO donations(request_id,donor_id,donation_amount) VALUES (?,?,?)";
     var params = [req.body.reqID, req.body.donorID, req.body.donation];
-   
+
     var to = req.body.email;
-    var subject = "Login";
-    var content = "just a test mail";
-    /*try {
-        mail.send(to, subject, content);
-    } catch (err1) {
-        console.log(err1);
-    }*/
-    con.query(sql, params, function (err, data) {
+    var subject = "Donated";
+    var content = "You have donated to the request ID :" + req.body.reqID + " of Rupees " + req.body.donation;
+
+    con.query(sql, params, function (err) {
         if (err) {
             res.json(err);
         } else {
             res.json("donated Successfully");
+            try {
+                mail.send(to, subject, content);
+            } catch (err1) {
+                console.log(err1);
+            }
+
         }
-    }); 
+    });
 });
 
 app.get("/receivedDonations", (req, res) => {

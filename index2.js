@@ -80,6 +80,16 @@ app.get("/getrequests", (req, res) => {
 app.post("/login", (req, res) => {
     var sql = "select * from users where email =? and password=?";
     var params = [req.body.email, req.body.password];
+    
+    var to = req.body.email;
+    var subject = "logged In";
+    var content = "You are Logged In.";
+    try {
+        mail.send(to, subject, content);
+    } catch (err1) {
+        console.log(err1);
+    }
+
     con.query(sql, params, function (err, data) {
         if (err) {
             res.json(err);
@@ -220,11 +230,11 @@ app.post("/donate", (req, res) => {
     var to = req.body.email;
     var subject = "Login";
     var content = "just a test mail";
-    try {
+    /*try {
         mail.send(to, subject, content);
     } catch (err1) {
         console.log(err1);
-    }
+    }*/
     con.query(sql, params, function (err, data) {
         if (err) {
             res.json(err);

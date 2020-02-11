@@ -3,6 +3,7 @@
         "host": "localhost",
         "user": "root",
         "password": "surya123",
-        "database": "test_db"
+        "database": "test_db",
+        "timezone": "utc"
       }
 }

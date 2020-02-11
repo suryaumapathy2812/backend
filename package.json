@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon index2.js"
   },
   "author": "",
   "license": "ISC",
@@ -19,6 +19,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "mysql": "^2.18.1",
+    "nodemailer": "^6.4.2",
     "nodemon": "^2.0.2"
   }
 }

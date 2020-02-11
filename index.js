@@ -15,7 +15,7 @@ var express = require("express"),
 
 app.use(cors());
 
-app.listen(PORT, () => console.log(`Listening on index2.js and PORT is ${PORT}`));
+app.listen(PORT, () => console.log(`Listening on index.js and PORT is ${PORT}`));
 
 const bodyparser = require("body-parser");
 

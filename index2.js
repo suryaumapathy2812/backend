@@ -216,6 +216,7 @@ app.get("/request/:req_id", (req, res) => {
 app.post("/donate", (req, res) => {
     var sql = "INSERT INTO donations(request_id,donor_id,donation_amount) VALUES (?,?,?)";
     var params = [req.body.reqID, req.body.donorID, req.body.donation];
+   
     var to = req.body.email;
     var subject = "Login";
     var content = "just a test mail";
